@@ -53,13 +53,13 @@ validate_tag() {
   if ! [[ ${#arr[@]} -eq 3 ]]; then
     die "The tag ${RED}$tag${NOFORMAT} has an invalid format."
   fi  
-  # validate service name
-
-  # check that a folder with service name exists
+  
   service=${arr[0]}
   release=${arr[1]}
   version=${arr[2]}
 
+  # validate service name
+  # check that a folder with service name exists
   if ! [[ -d "$script_dir/proto/$service" ]]; then
     die "no service found with name: $service"
   fi
