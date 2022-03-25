@@ -74,7 +74,6 @@ validate_tag() {
 }
 
 create_dist_folder() {
-
   mkdir -p $1
 }
 
