@@ -17,10 +17,10 @@ main() {
   # expected format: [service-name]/release/[version]
 
   tag="${args[0]}"
-
+  dist="dist/generated"
   validate_tag $tag
 
-  create_dist_folder dist/generated 
+  create_dist_folder "$dist"
 
   IFS='/' read -a arr <<< "$tag"
   
@@ -38,8 +38,9 @@ main() {
         --java_out=dist/generated \
         "$script_dir"/"$proto"
   done
-
-  jar cf $service_name-events-${version}.jar dist/generated 
+  _jar=$service_name-events-${version}.jar
+  # package generated files into jar
+  jar cf $_jar "$dist" 
 
 }
 
