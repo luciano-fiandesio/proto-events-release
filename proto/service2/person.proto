@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package io.cloudevents.v1;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+import "types.proto";
+
+option go_package = "cloudevents.io/genproto/v1";
+option java_package = "io.cloudevents.v1.proto";
+option java_multiple_files = true;
+option php_namespace = "Io\\CloudEvents\\V1\\Proto";
+option ruby_package = "Io::CloudEvents::V1::Proto";
+
+message PersonPublishedCloudEvent {
+
+  // -- CloudEvent Context Attributes
+
+  // Required Attributes
+  string id = 1;
+  string source = 2; // URI-reference
+  string spec_version = 3; // Should be ALWAYS set to v1.0.1
+  string type = 4;
+
+  // Optional & Extension Attributes
+  map<string, CloudEventAttributeValue> attributes = 5;
+
+  // -- CloudEvent Data (Bytes, Text, or Proto)
+  oneof  data {
+    bytes binary_data = 6;
+    string text_data = 7;
+    PersonProto proto_data = 8;
+  }
+
+  /**
+   * The CloudEvent specification defines
+   * seven attribute value types...
+   */
+  message CloudEventAttributeValue {
+
+    oneof attr {
+      bool ce_boolean = 1;
+      int32 ce_integer = 2;
+      string ce_string = 3;
+      bytes ce_bytes = 4;
+      string ce_uri = 5;
+      string ce_uri_ref = 6;
+      google.protobuf.Timestamp ce_timestamp = 7;
+    }
+  }
+}
+
+message PersonProto {
+
+  com.visualmeta.types.UUID id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  com.visualmeta.types.Date date_of_birth = 4;
+  int32 serial = 5;
+}
+
