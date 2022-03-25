@@ -102,7 +102,7 @@ msg() {
 die() {
   local msg=$1
   local code=${2-1} # default exit status 1
-  msg "$msg"
+  msg "💀 - $msg"
   exit "$code"
 }
 
@@ -113,14 +113,8 @@ parse_params() {
 
   while :; do
     case "${1-}" in
-    -h | --help) usage ;;
     -v | --verbose) set -x ;;
     --no-color) NO_COLOR=1 ;;
-    -f | --flag) flag=1 ;; # example flag
-    -p | --param) # example named parameter
-      param="${2-}"
-      shift
-      ;;
     -?*) die "Unknown option: $1" ;;
     *) break ;;
     esac
@@ -130,7 +124,6 @@ parse_params() {
   args=("$@")
 
   # check required params and arguments
-  # [[ -z "${param-}" ]] && die "Missing required parameter: param"
   [[ ${#args[@]} -eq 0 ]] && die "Missing script arguments"
 
   return 0
