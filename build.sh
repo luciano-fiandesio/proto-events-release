@@ -8,10 +8,6 @@ script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
 SEMVER_REGEX="^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(\\-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?(\\+[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?$"
 
 main() {
-  #msg "${RED}Read parameters:${NOFORMAT}"
-  #msg "- flag: ${flag}"
-  #msg "- param: ${param}"
-  #msg "- arguments: ${args[*]-}"
 
   # parse tag
   # expected format: [service-name]/release/[version]
